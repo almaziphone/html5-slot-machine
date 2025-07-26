@@ -13,21 +13,12 @@ export default class Slot {
   spinButton: HTMLButtonElement;
   autoPlayCheckbox: HTMLInputElement;
   currentSymbols: string[][];
-  nextSymbols: string[][];
   config: SlotConfig;
 
   constructor(domElement: HTMLElement, config: SlotConfig = {}) {
     Symbol.preload();
 
     this.currentSymbols = [
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-    ];
-
-    this.nextSymbols = [
       [Symbol.random(), Symbol.random(), Symbol.random()],
       [Symbol.random(), Symbol.random(), Symbol.random()],
       [Symbol.random(), Symbol.random(), Symbol.random()],
@@ -57,8 +48,7 @@ export default class Slot {
   }
 
   spin(): Promise<void> {
-    this.currentSymbols = this.nextSymbols;
-    this.nextSymbols = [
+    const resultSymbols: string[][] = [
       [Symbol.random(), Symbol.random(), Symbol.random()],
       [Symbol.random(), Symbol.random(), Symbol.random()],
       [Symbol.random(), Symbol.random(), Symbol.random()],
@@ -66,14 +56,17 @@ export default class Slot {
       [Symbol.random(), Symbol.random(), Symbol.random()],
     ];
 
-    this.onSpinStart(this.nextSymbols);
+    this.onSpinStart(resultSymbols);
 
     return Promise.all(
       this.reels.map((reel) => {
-        reel.renderSymbols(this.nextSymbols[reel.idx]);
+        reel.renderSymbols(resultSymbols[reel.idx]);
         return reel.spin();
       }),
-    ).then(() => this.onSpinEnd(this.nextSymbols));
+    ).then(() => {
+      this.currentSymbols = resultSymbols;
+      this.onSpinEnd(resultSymbols);
+    });
   }
 
   onSpinStart(symbols: string[][]): void {
