@@ -40,7 +40,7 @@ export default class Slot {
     this.config = config;
   }
 
-  spin() {
+  async spin() {
     this.currentSymbols = this.nextSymbols;
     this.nextSymbols = [
       [Symbol.random(), Symbol.random(), Symbol.random()],
@@ -52,12 +52,13 @@ export default class Slot {
 
     this.onSpinStart(this.nextSymbols);
 
-    return Promise.all(
+    await Promise.all(
       this.reels.map((reel) => {
         reel.renderSymbols(this.nextSymbols[reel.idx]);
         return reel.spin();
       }),
-    ).then(() => this.onSpinEnd(this.nextSymbols));
+    );
+    return this.onSpinEnd(this.nextSymbols);
   }
 
   onSpinStart(symbols) {
