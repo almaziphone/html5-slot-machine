@@ -13,6 +13,7 @@ Built using the _Web Animations API_.
 
 - Fully responsive for great UX on mobile, web & fullscreen mode.
 - Autoplay functionality, which keeps running even if the game window is in background.
+- Simple sound effects on spin start and win events.
 
 ## Installation, Build & Deployment
 
