@@ -48,22 +48,20 @@ export default class Reel {
     return 1 + Math.pow(this.idx / 2, 2);
   }
 
-  renderSymbols(nextSymbols: string[]): void {
+  private renderSpin(nextSymbols: string[]): void {
     const fragment = document.createDocumentFragment();
+    const count = Math.floor(this.factor) * 10;
 
-    for (let i = 3; i < 3 + Math.floor(this.factor) * 10; i++) {
-      const icon = new Symbol(
-        i >= 10 * Math.floor(this.factor) - 2
-          ? nextSymbols[i - Math.floor(this.factor) * 10]
-          : undefined,
-      );
-      fragment.appendChild(icon.img);
+    for (let i = 0; i < count - 3; i++) {
+      fragment.appendChild(new Symbol().img);
     }
+
+    nextSymbols.forEach((s) => fragment.appendChild(new Symbol(s).img));
 
     this.symbolContainer.appendChild(fragment);
   }
 
-  spin(): Promise<void> {
+  spin(nextSymbols: string[]): Promise<void> {
     const animationPromise = new Promise<void>(
       (resolve) => (this.animation.onfinish = resolve),
     );
@@ -71,17 +69,18 @@ export default class Reel {
       setTimeout(resolve, this.factor * 1000),
     );
 
+    this.renderSpin(nextSymbols);
+
     this.animation.cancel();
     this.animation.play();
 
     return Promise.race([animationPromise, timeoutPromise]).then(() => {
       if (this.animation.playState !== "finished") this.animation.finish();
 
-      const max = this.symbolContainer.children.length - 3;
-
-      for (let i = 0; i < max; i++) {
-        this.symbolContainer.firstChild.remove();
-      }
+      this.symbolContainer.innerHTML = "";
+      nextSymbols.forEach((s) =>
+        this.symbolContainer.appendChild(new Symbol(s).img),
+      );
     });
   }
 }
