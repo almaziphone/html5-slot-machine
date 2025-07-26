@@ -6,19 +6,19 @@ export default class Slot {
     Symbol.preload();
 
     this.currentSymbols = [
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
     ];
 
     this.nextSymbols = [
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
+      [Symbol.random(), "star", Symbol.random()],
     ];
 
     this.container = domElement;
