@@ -84,6 +84,13 @@ input[type="checkbox"] {
   text-align: center;
 }
 
+#spin {
+  /* color: #d56d6d; */
+  /* font-size: 50px; */
+  /* text-align: center; */
+  border-radius: 5px; /* округление */
+}
+
 #slot.inverted .reel {
   transform: scaleY(-1);
 }
