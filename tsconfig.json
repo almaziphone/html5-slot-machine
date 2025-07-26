@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "es6",
+    "strict": true,
+    "rootDir": "src/ts",
+    "outDir": "src/js",
+    "declaration": false,
+    "types": [],
+    "skipLibCheck": true
+  },
+  "include": ["src/ts/**/*"]
+}
