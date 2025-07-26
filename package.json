@@ -7,8 +7,7 @@
   "repository": "johakr/html5-slot-machine",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "prepare": "husky"
+    "build": "vite build"
   },
   "dependencies": {
     "vue": "^3.4.0",
