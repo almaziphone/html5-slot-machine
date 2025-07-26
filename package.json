@@ -6,8 +6,9 @@
   "author": "Johannes Kronmüller <hello@johakr.me> (https://johakr.me/)",
   "repository": "johakr/html5-slot-machine",
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "webpack serve --mode development",
+    "build:ts": "tsc",
+    "build": "npm run build:ts && webpack --mode production",
+    "start": "npm run build:ts && webpack serve --mode development",
     "prepare": "husky"
   },
   "devDependencies": {
