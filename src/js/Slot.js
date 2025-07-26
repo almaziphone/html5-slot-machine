@@ -6,26 +6,26 @@ export default class Slot {
     Symbol.preload();
 
     this.currentSymbols = [
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
     ];
 
     this.nextSymbols = [
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
-      ["death_star", "death_star", "death_star"],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
     ];
 
     this.container = domElement;
 
     this.reels = Array.from(this.container.getElementsByClassName("reel")).map(
       (reelContainer, idx) =>
-        new Reel(reelContainer, idx, this.currentSymbols[idx])
+        new Reel(reelContainer, idx, this.currentSymbols[idx]),
     );
 
     this.spinButton = document.getElementById("spin");
@@ -56,7 +56,7 @@ export default class Slot {
       this.reels.map((reel) => {
         reel.renderSymbols(this.nextSymbols[reel.idx]);
         return reel.spin();
-      })
+      }),
     ).then(() => this.onSpinEnd(this.nextSymbols));
   }
 
