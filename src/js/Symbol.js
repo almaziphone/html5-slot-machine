@@ -20,15 +20,20 @@ export default class Symbol {
 
   static get symbols() {
     return [
-      "at_at",
-      "c3po",
-      "darth_vader",
-      "death_star",
-      "falcon",
-      "r2d2",
-      "stormtrooper",
-      "tie_ln",
-      "yoda",
+      "clown-face",
+      "cowboy-hat-face",
+      "face-screaming-in-fear",
+      "face-with-open-mouth",
+      "grinning-face-1",
+      "hugging-face",
+      "panda",
+      "pile-of-poo",
+      "rolling-on-the-floor-laughing",
+      "santa-claus",
+      "smiling-face-with-heart-eyes",
+      "smiling-face-with-hearts",
+      "star",
+      "star-struck",
     ];
   }
 
