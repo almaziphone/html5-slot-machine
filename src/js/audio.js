@@ -14,11 +14,21 @@ function beep(freq, duration) {
   );
   oscillator.stop(audioCtx.currentTime + duration);
 }
+// export function playSpinSound() {
+//   beep(523.25, 0.1);
+// }
+
 export function playSpinSound() {
-  beep(523.25, 0.1);
+  const endAudio = new Audio("/mp3/start.mp3");
+  endAudio.play();
 }
-export function playWinSound() {
-  beep(1046.5, 0.1);
-  setTimeout(() => beep(1046.5, 0.1), 150);
-  setTimeout(() => beep(1046.5, 0.1), 300);
+// export function playEndSound() {
+//   beep(1046.5, 0.1);
+//   setTimeout(() => beep(1046.5, 0.1), 150);
+//   setTimeout(() => beep(1046.5, 0.1), 300);
+// }
+
+export function playEndSound() {
+  const endAudio = new Audio("/mp3/slot_machine_bet_04.mp3");
+  endAudio.play();
 }

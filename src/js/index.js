@@ -1,5 +1,5 @@
 import Slot from "./Slot.js";
-import { playSpinSound, playWinSound } from "./audio.js";
+import { playSpinSound, playEndSound } from "./audio.js";
 
 const config = {
   inverted: false, // true: reels spin from top to bottom; false: reels spin from bottom to top
@@ -9,7 +9,7 @@ const config = {
   },
   onSpinEnd: (symbols) => {
     console.log("onSpinEnd", symbols);
-    playWinSound();
+    playEndSound();
   },
 };
 
