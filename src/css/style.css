@@ -16,6 +16,17 @@ body {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  #controls {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  #controls button {
+    margin-bottom: 10px;
+  }
+}
+
 #reels {
   display: flex;
   width: 100vw;

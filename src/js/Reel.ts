@@ -1,7 +1,16 @@
-import Symbol from "./Symbol.js";
+import Symbol from "./Symbol";
 
 export default class Reel {
-  constructor(reelContainer, idx, initialSymbols) {
+  reelContainer: HTMLElement;
+  idx: number;
+  symbolContainer: HTMLDivElement;
+  animation: Animation;
+
+  constructor(
+    reelContainer: HTMLElement,
+    idx: number,
+    initialSymbols: string[],
+  ) {
     this.reelContainer = reelContainer;
     this.idx = idx;
 
@@ -35,11 +44,11 @@ export default class Reel {
     );
   }
 
-  get factor() {
+  get factor(): number {
     return 1 + Math.pow(this.idx / 2, 2);
   }
 
-  renderSymbols(nextSymbols) {
+  renderSymbols(nextSymbols: string[]): void {
     const fragment = document.createDocumentFragment();
 
     for (let i = 3; i < 3 + Math.floor(this.factor) * 10; i++) {
@@ -54,11 +63,11 @@ export default class Reel {
     this.symbolContainer.appendChild(fragment);
   }
 
-  spin() {
-    const animationPromise = new Promise(
+  spin(): Promise<void> {
+    const animationPromise = new Promise<void>(
       (resolve) => (this.animation.onfinish = resolve),
     );
-    const timeoutPromise = new Promise((resolve) =>
+    const timeoutPromise = new Promise<void>((resolve) =>
       setTimeout(resolve, this.factor * 1000),
     );
 

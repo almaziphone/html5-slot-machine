@@ -18,12 +18,12 @@ Built using the _Web Animations API_.
 
 1. Clone repository
 2. Run `npm install`
-   - _Development_: run `npm start` and go to `http://localhost:8080`
+   - _Development_: run `npm run dev` and go to `http://localhost:5173`
    - _Production_: run `npm run build` and serve from `/dist`
 
 ## Configuration
 
-For configuration options see `config` object in [index.js](https://github.com/johakr/html5-slot-machine/blob/master/src/js/index.js)
+For configuration options see `config` object in [Slot.ts](src/js/Slot.ts)
 
 | Property      | Description                                                                                                                            | Default   |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------- |

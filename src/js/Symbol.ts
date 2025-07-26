@@ -1,11 +1,14 @@
-const cache = {};
+const cache: Record<string, HTMLImageElement> = {};
 
 export default class Symbol {
-  constructor(name = Symbol.random()) {
+  name: string;
+  img: HTMLImageElement;
+
+  constructor(name: string = Symbol.random()) {
     this.name = name;
 
     if (cache[name]) {
-      this.img = cache[name].cloneNode();
+      this.img = cache[name].cloneNode() as HTMLImageElement;
     } else {
       this.img = new Image();
       this.img.src = require(`../assets/symbols/${name}.svg`);
