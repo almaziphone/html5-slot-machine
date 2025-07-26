@@ -50,12 +50,17 @@ body {
 }
 
 #controls {
-  background-color: rgba(255, 255, 255, 0.9);
-  height: 50px;
+  background-color: rgba(70, 70, 59, 0.9);
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 30px;
+  border-radius: 24px; /* округление */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* поддержка Safari */
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-top: 20px; /* отступ сверху */
 }
 
 #controls label {
@@ -75,7 +80,7 @@ input[type="checkbox"] {
 
 #jackpot {
   color: #d5ad6d;
-  font-size: 40px;
+  font-size: 50px;
   text-align: center;
 }
 
@@ -85,4 +90,44 @@ input[type="checkbox"] {
 
 #slot.inverted .reel > .icons > img {
   transform: scaleY(-1);
+}
+
+#jackpot,
+#controls {
+  font-family: "Orbitron", sans-serif;
+}
+
+.glow-text {
+  background: linear-gradient(
+    270deg,
+    #ff6ec4,
+    #7873f5,
+    #4ade80,
+    #facc15,
+    #ff6ec4
+  );
+  background-size: 1000% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 6s ease infinite;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 6px rgba(255, 255, 255, 0.5),
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 0 20px rgba(255, 0, 255, 0.2);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
