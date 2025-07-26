@@ -2,8 +2,8 @@
 
 ![Build and Deploy Status](https://github.com/johakr/html5-slot-machine/actions/workflows/deploy.yml/badge.svg) [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-This is a modern proof of concept casino slot machine game, built using only vanilla HTML, CSS and JavaScript.
-No Flash or Frameworks required. Allowing for an amazing low bundle size and blazing fast performance.
+This is a modern proof of concept casino slot machine game built with **Vue&nbsp;3** and TypeScript.
+The project uses Vite for a small bundle size and blazing fast performance.
 
 Built using the _Web Animations API_.
 
@@ -18,12 +18,12 @@ Built using the _Web Animations API_.
 
 1. Clone repository
 2. Run `npm install`
-   - _Development_: run `npm start` and go to `http://localhost:8080`
+   - _Development_: run `npm run dev` and go to `http://localhost:5173`
    - _Production_: run `npm run build` and serve from `/dist`
 
 ## Configuration
 
-For configuration options see `config` object in [index.js](https://github.com/johakr/html5-slot-machine/blob/master/src/js/index.js)
+For configuration options see `config` object in [Slot.ts](src/js/Slot.ts)
 
 | Property      | Description                                                                                                                            | Default   |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------- | --------- |

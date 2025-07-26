@@ -1,8 +1,22 @@
-import Reel from "./Reel.js";
-import Symbol from "./Symbol.js";
+import Reel from "./Reel";
+import Symbol from "./Symbol";
+
+interface SlotConfig {
+  inverted?: boolean;
+  onSpinStart?: (symbols: string[][]) => void;
+  onSpinEnd?: (symbols: string[][]) => void;
+}
 
 export default class Slot {
-  constructor(domElement, config = {}) {
+  container: HTMLElement;
+  reels: Reel[];
+  spinButton: HTMLButtonElement;
+  autoPlayCheckbox: HTMLInputElement;
+  currentSymbols: string[][];
+  nextSymbols: string[][];
+  config: SlotConfig;
+
+  constructor(domElement: HTMLElement, config: SlotConfig = {}) {
     Symbol.preload();
 
     this.currentSymbols = [
@@ -28,10 +42,12 @@ export default class Slot {
         new Reel(reelContainer, idx, this.currentSymbols[idx]),
     );
 
-    this.spinButton = document.getElementById("spin");
+    this.spinButton = document.getElementById("spin") as HTMLButtonElement;
     this.spinButton.addEventListener("click", () => this.spin());
 
-    this.autoPlayCheckbox = document.getElementById("autoplay");
+    this.autoPlayCheckbox = document.getElementById(
+      "autoplay",
+    ) as HTMLInputElement;
 
     if (config.inverted) {
       this.container.classList.add("inverted");
@@ -40,7 +56,7 @@ export default class Slot {
     this.config = config;
   }
 
-  spin() {
+  spin(): Promise<void> {
     this.currentSymbols = this.nextSymbols;
     this.nextSymbols = [
       [Symbol.random(), Symbol.random(), Symbol.random()],
@@ -60,13 +76,13 @@ export default class Slot {
     ).then(() => this.onSpinEnd(this.nextSymbols));
   }
 
-  onSpinStart(symbols) {
+  onSpinStart(symbols: string[][]): void {
     this.spinButton.disabled = true;
 
     this.config.onSpinStart?.(symbols);
   }
 
-  onSpinEnd(symbols) {
+  onSpinEnd(symbols: string[][]): void {
     this.spinButton.disabled = false;
 
     this.config.onSpinEnd?.(symbols);
