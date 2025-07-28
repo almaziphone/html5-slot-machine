@@ -14,7 +14,7 @@ export default class Reel {
         // We cannot animate translateY & filter at the same time in safari for some reasons,
         // so we go with animating top & filter instead.
         { top: 0, filter: "blur(0)" },
-        { filter: "blur(50px)", offset: 0.5 },
+        { filter: "blur(10px)", offset: 0.5 },
         {
           top: `calc((${Math.floor(this.factor) * 10} / 3) * -100% - (${
             Math.floor(this.factor) * 10
@@ -24,7 +24,7 @@ export default class Reel {
         },
       ],
       {
-        duration: this.factor * 1000,
+        duration: this.factor * 500,
         easing: "ease-in-out",
       },
     );
@@ -59,7 +59,7 @@ export default class Reel {
       (resolve) => (this.animation.onfinish = resolve),
     );
     const timeoutPromise = new Promise((resolve) =>
-      setTimeout(resolve, this.factor * 1000),
+      setTimeout(resolve, this.factor * 500),
     );
 
     this.animation.cancel();
