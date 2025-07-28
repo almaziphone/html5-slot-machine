@@ -1,24 +1,30 @@
-const cache = {};
+const cache: Record<string, HTMLImageElement> = {};
 
-export default class Symbol {
-  constructor(name = Symbol.random()) {
+export default class SlotSymbol {
+  img: HTMLImageElement;
+  name: string;
+
+  constructor(name: string = SlotSymbol.random()) {
     this.name = name;
 
-    if (cache[name]) {
-      this.img = cache[name].cloneNode();
+    const cached = cache[name];
+    if (cached) {
+      this.img = cached.cloneNode() as HTMLImageElement;
     } else {
       this.img = new Image();
-      this.img.src = require(`../assets/symbols/${name}.svg`);
-
+      this.img.src = new URL(
+        `../assets/symbols/${name}.svg`,
+        import.meta.url,
+      ).href;
       cache[name] = this.img;
     }
   }
 
-  static preload() {
-    Symbol.symbols.forEach((symbol) => new Symbol(symbol));
+  static preload(): void {
+    SlotSymbol.symbols.forEach((s) => new SlotSymbol(s));
   }
 
-  static get symbols() {
+  static get symbols(): string[] {
     return [
       "clown-face",
       "cowboy-hat-face",
@@ -40,7 +46,7 @@ export default class Symbol {
     ];
   }
 
-  static random() {
+  static random(): string {
     return this.symbols[Math.floor(Math.random() * this.symbols.length)];
   }
 }

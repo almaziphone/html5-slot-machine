@@ -1,7 +1,16 @@
-import Symbol from "./Symbol.js";
+import SlotSymbol from "./Symbol";
 
 export default class Reel {
-  constructor(reelContainer, idx, initialSymbols) {
+  private reelContainer: HTMLElement;
+  private symbolContainer: HTMLDivElement;
+  idx: number;
+  private animation: Animation;
+
+  constructor(
+    reelContainer: HTMLElement,
+    idx: number,
+    initialSymbols: string[],
+  ) {
     this.reelContainer = reelContainer;
     this.idx = idx;
 
@@ -11,15 +20,12 @@ export default class Reel {
 
     this.animation = this.symbolContainer.animate(
       [
-        // We cannot animate translateY & filter at the same time in safari for some reasons,
-        // so we go with animating top & filter instead.
         { top: 0, filter: "blur(0)" },
         { filter: "blur(10px)", offset: 0.5 },
         {
           top: `calc((${Math.floor(this.factor) * 10} / 3) * -100% - (${
             Math.floor(this.factor) * 10
           } * 3px))`,
-
           filter: "blur(0)",
         },
       ],
@@ -31,19 +37,19 @@ export default class Reel {
     this.animation.cancel();
 
     initialSymbols.forEach((symbol) =>
-      this.symbolContainer.appendChild(new Symbol(symbol).img),
+      this.symbolContainer.appendChild(new SlotSymbol(symbol).img),
     );
   }
 
-  get factor() {
+  get factor(): number {
     return 1 + Math.pow(this.idx / 2, 2);
   }
 
-  renderSymbols(nextSymbols) {
+  renderSymbols(nextSymbols: string[]): void {
     const fragment = document.createDocumentFragment();
 
     for (let i = 3; i < 3 + Math.floor(this.factor) * 10; i++) {
-      const icon = new Symbol(
+      const icon = new SlotSymbol(
         i >= 10 * Math.floor(this.factor) - 2
           ? nextSymbols[i - Math.floor(this.factor) * 10]
           : undefined,
@@ -54,11 +60,11 @@ export default class Reel {
     this.symbolContainer.appendChild(fragment);
   }
 
-  spin() {
-    const animationPromise = new Promise(
-      (resolve) => (this.animation.onfinish = resolve),
+  spin(): Promise<void> {
+    const animationPromise = new Promise<void>(
+      (resolve) => (this.animation.onfinish = () => resolve()),
     );
-    const timeoutPromise = new Promise((resolve) =>
+    const timeoutPromise = new Promise<void>((resolve) =>
       setTimeout(resolve, this.factor * 500),
     );
 
@@ -69,9 +75,8 @@ export default class Reel {
       if (this.animation.playState !== "finished") this.animation.finish();
 
       const max = this.symbolContainer.children.length - 3;
-
       for (let i = 0; i < max; i++) {
-        this.symbolContainer.firstChild.remove();
+        this.symbolContainer.firstChild?.remove();
       }
     });
   }
